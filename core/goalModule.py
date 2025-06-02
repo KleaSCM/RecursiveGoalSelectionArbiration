@@ -84,7 +84,18 @@ class Goal:
         base = urgency_val * utility_val
         dep_bonus = self.dependency_value(t, state)
         final = self.effective_value(t, state)
-        traits_list = ', '.join([t.name for t in self.traits.traits]) or 'None'
+
+        # Defensive trait extraction
+        traits_list = 'None'
+        if hasattr(self.traits, 'traits') and self.traits.traits:
+            traits_names = []
+            for trait in self.traits.traits:
+                name = getattr(trait, 'name', None)
+                if name:
+                    traits_names.append(name)
+                else:
+                    traits_names.append(str(trait))
+            traits_list = ', '.join(traits_names)
 
         return (
             f"Goal: {self.name}\n"
@@ -96,7 +107,6 @@ class Goal:
             f"  Trait Modifiers: {final - (base + dep_bonus):.4f}\n"
             f"  Total Effective Value: {final:.4f}"
         )
-
 
 # --- Sample Urgency and Utility Functions ---
 
