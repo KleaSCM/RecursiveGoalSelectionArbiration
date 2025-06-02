@@ -4,26 +4,31 @@ from core.state import CognitiveState
 
 import random
 
-explore = Goal("Explore", linear_urgency, curiosity_utility)
-survive = Goal("Survive", linear_urgency, safety_utility)
-master = Goal("MasterGoal", linear_urgency, lambda s: 0.5, dependencies=[explore, survive])
+# Define goals with some dependencies
+explore = Goal("Explore", linear_urgency, curiosity_utility, traits=[])
+survive = Goal("Survive", linear_urgency, safety_utility, traits=[])
+master = Goal("MasterGoal", linear_urgency, lambda s: 0.5, traits=[], dependencies=[explore, survive])
+
 all_goals = [master, explore, survive]
 
 def execute_goal(goal: Goal, t: float, state: CognitiveState, arbitrator: GoalArbitrator, depth=0):
     indent = "  " * depth
-    print(f"{indent}→ Selected: {goal.name}")
+    print(f"{indent}→ Selected Goal: {goal.name}")
     print(f"{indent}{goal.describe(t, state._state_data).replace(chr(10), chr(10) + indent)}")
     urgency_val = goal.urgency(t, state._state_data)
     utility_val = goal.utility(state._state_data)
     print(f"{indent}  Urgency: {urgency_val:.3f}, Utility: {utility_val:.3f}")
 
     if goal.dependencies:
-        print(f"{indent}↳ Resolving dependencies of {goal.name}...")
+        print(f"{indent}↳ Resolving dependencies of '{goal.name}'...")
+        # Filter dependencies from arbitrator's goals
         subgoals = [g for g in arbitrator.goals if g.name in [d.name for d in goal.dependencies]]
         sub_arbitrator = GoalArbitrator(subgoals)
         selected_subgoal = sub_arbitrator.select_goal(t, state._state_data)
         if selected_subgoal:
             execute_goal(selected_subgoal, t, state, sub_arbitrator, depth + 1)
+        else:
+            print(f"{indent}  No subgoal selected for dependencies of '{goal.name}'")
     else:
         print(f"{indent}✓ Executing leaf goal: {goal.name}")
 
@@ -49,7 +54,7 @@ def run_full_demo():
 
     for step in range(5):
         print(f"\n\n=== Time Step {step} (t = {t:.1f}) ===")
-        print(f"State: {state._state_data}")
+        print(f"Current State: {state._state_data}")
 
         selected_goal = arbitrator.select_goal(t, state._state_data)
         if selected_goal:

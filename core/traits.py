@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Dict, List, Optional
-from .goalModule import Goal
+
+from core.shared_types import Trait, TraitSet
 
 
 

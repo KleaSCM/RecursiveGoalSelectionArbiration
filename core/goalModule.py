@@ -1,9 +1,7 @@
 import math
-from typing import Callable, Dict, List, Optional, TYPE_CHECKING
+from typing import Callable, Dict, List, Optional
 
-if TYPE_CHECKING:
-    # Only import for type checking (avoids runtime circular import)
-    from .traits import GoalTrait
+from core.shared_types import Trait, TraitSet, URGENCY_SENSITIVE, RISK_AVERSE, EXPLORATORY
 
 class Goal:
     def __init__(
@@ -12,27 +10,45 @@ class Goal:
         urgency_fn: Callable[[float], float],
         utility_fn: Callable[[Dict], float],
         dependencies: Optional[List['Goal']] = None,
-        traits: Optional[List['GoalTrait']] = None  # Use string literal to delay evaluation
+        traits: Optional[TraitSet] = None
     ):
         self.name = name
         self.urgency_fn = urgency_fn
         self.utility_fn = utility_fn
         self.dependencies = dependencies or []
-        self.traits = traits or []
+
+        if traits is None:
+            self.traits = TraitSet([])
+        elif isinstance(traits, TraitSet):
+            self.traits = traits
+        else:
+            self.traits = TraitSet(traits)
 
     def urgency(self, t: float, state: Optional[Dict] = None) -> float:
-        base_urgency = self.urgency_fn(t)
-        for trait in self.traits:
-            if hasattr(trait, 'adjust_urgency'):
-                base_urgency = trait.adjust_urgency(base_urgency, t=t, state=state, goal=self)
-        return base_urgency
+        base = self.urgency_fn(t)
+
+        if self.traits.has_trait(URGENCY_SENSITIVE):
+            time_factor = 1.0 + 0.5 * (1.0 - base)
+            base *= time_factor
+
+        if self.traits.has_trait(RISK_AVERSE):
+            risk = state.get("risk", 0.0) if state else 0.0
+            base *= max(0.1, 1.0 - risk)
+
+        return base
 
     def utility(self, state: Dict) -> float:
-        base_utility = self.utility_fn(state)
-        for trait in self.traits:
-            if hasattr(trait, 'adjust_utility'):
-                base_utility = trait.adjust_utility(base_utility, state=state, goal=self)
-        return base_utility
+        base = self.utility_fn(state)
+
+        if self.traits.has_trait(EXPLORATORY):
+            novelty = state.get("novelty", 0.5)
+            base *= 1.0 + 0.5 * novelty
+
+        if self.traits.has_trait(RISK_AVERSE):
+            safety = state.get("safety_level", 1.0)
+            base *= safety
+
+        return base
 
     def dependency_value(self, t: float, state: Dict) -> float:
         if not self.dependencies:
@@ -47,21 +63,20 @@ class Goal:
         base = self.base_effective_value(t, state)
         dep_bonus = self.dependency_value(t, state)
 
-        modifier_sum = 0.0
-        for trait in self.traits:
-            modifier = trait.modify(
-                base=base,
-                urgency=self.urgency(t, state),
-                utility=self.utility(state),
-                dependencies=self.dependencies,
-                dep_value=dep_bonus,
-                state=state,
-                goal=self,
-                t=t
-            )
-            modifier_sum += modifier
+        trait_mod = 0.0
 
-        return base + dep_bonus + modifier_sum
+        if self.traits.has_trait(URGENCY_SENSITIVE):
+            trait_mod += 0.1 * base
+
+        if self.traits.has_trait(RISK_AVERSE):
+            risk = state.get("risk", 0.0)
+            trait_mod -= 0.2 * risk * base
+
+        if self.traits.has_trait(EXPLORATORY):
+            novelty = state.get("novelty", 0.5)
+            trait_mod += 0.15 * novelty * base
+
+        return base + dep_bonus + trait_mod
 
     def describe(self, t: float, state: Dict) -> str:
         urgency_val = self.urgency(t, state)
@@ -69,7 +84,7 @@ class Goal:
         base = urgency_val * utility_val
         dep_bonus = self.dependency_value(t, state)
         final = self.effective_value(t, state)
-        traits_list = ', '.join([trait.__class__.__name__ for trait in self.traits]) or 'None'
+        traits_list = ', '.join([t.name for t in self.traits.traits]) or 'None'
 
         return (
             f"Goal: {self.name}\n"
@@ -78,18 +93,18 @@ class Goal:
             f"  Utility(state): {utility_val:.4f}\n"
             f"  Dependency Bonus: {dep_bonus:.4f}\n"
             f"  Base Value: {base:.4f}\n"
+            f"  Trait Modifiers: {final - (base + dep_bonus):.4f}\n"
             f"  Total Effective Value: {final:.4f}"
         )
 
 
+# --- Sample Urgency and Utility Functions ---
+
 def linear_urgency(t: float) -> float:
-    """Simple urgency decreases linearly from 1 to 0 over time."""
     return max(0.0, 1.0 - t)
 
 def curiosity_utility(state: Dict) -> float:
-    """Utility proportional to novelty measure in state."""
     return state.get('novelty', 0.5)
 
 def safety_utility(state: Dict) -> float:
-    """Utility proportional to safety level in state."""
     return state.get('safety_level', 1.0)
