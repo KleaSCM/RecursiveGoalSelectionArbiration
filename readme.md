@@ -116,11 +116,13 @@ $$
 Where modifier term $M$ is given by:
 
 $$
-M(t, s; T) =
-  \alpha_1 \cdot 1_{\text{urgency-sensitive}} \cdot \text{BaseValue}
-+ \alpha_2 \cdot 1_{\text{risk-averse}} \cdot (-\text{risk} \cdot \text{BaseValue})
-+ \alpha_3 \cdot 1_{\text{exploratory}} \cdot \text{novelty} \cdot \text{BaseValue}
+\begin{aligned}
+M(t, s; T) = {} & \alpha_1 \cdot 1_{\text{urgency-sensitive}} \cdot \text{BaseValue} \\
+                & + \alpha_2 \cdot 1_{\text{risk-averse}} \cdot (-\text{risk} \cdot \text{BaseValue}) \\
+                & + \alpha_3 \cdot 1_{\text{exploratory}} \cdot \text{novelty} \cdot \text{BaseValue}
+\end{aligned}
 $$
+
 
 ---
 
