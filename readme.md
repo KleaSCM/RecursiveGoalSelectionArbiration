@@ -14,6 +14,8 @@ The system implements:
 
 This modular architecture is simulation-ready and serves as a component within recursive cognitive systems. It is capable of Lyapunov-stable goal selection in multi-agent cognitive fields.
 
+S(t) → M(t) → A(t) → C(t) ↑ ↓ R Φ, Σ, T
+
 ---
 
 ## Contents
