@@ -129,21 +129,21 @@ $$
 
 # Lyapunov Stability in Recursive Goal Arbitration
 
-This section formalizes the **Lyapunov stability criteria** for the recursive goal arbitration system described in this package.
+This section formalizes the Lyapunov stability criteria for the recursive goal arbitration system described in this package.
 
 ## Overview
 
-Our goal prioritization system recursively computes **effective values** for goals based on urgency, utility, dependencies, and trait modulation.
+Our goal prioritization system recursively computes effective values for goals based on urgency, utility, dependencies, and trait modulation.
 
-We now explicitly prove that **small perturbations in urgency, utility, or state variables will not cause the system to diverge**, but instead decay towards a stable priority distribution over time.
+We now explicitly prove that small perturbations in urgency, utility, or state variables will not cause the system to diverge, but instead decay towards a stable priority distribution over time.
 
-This guarantees **Lyapunov stability** of the arbitration mechanism.
+This guarantees Lyapunov stability of the arbitration mechanism.
 
 ---
 
 ## Formal Setup
 
-Let the system at time \( t \) be described by a **priority vector** \( \mathbf{P}(t) \in \mathbb{R}^n \), where each component \( P_i(t) \) is the **effective value** of goal \( i \).
+Let the system at time $(t)$ be described by a priority vector $(\mathbf{P}(t) \in \mathbb{R}^n )$, where each component $(P_i(t))$ is the effective value* of goal $(i)$.
 
 From the system:
 \[
