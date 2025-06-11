@@ -524,9 +524,3 @@ print(describe(G2, t=0.25, state={"risk": 0.2, "novelty": 0.9, "safety_level": 0
 ```
 
 ---
-
-## License
-
-MIT License. Use freely with attribution to Aikawa Yuriko and contributors.
-
----
