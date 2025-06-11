@@ -12,7 +12,7 @@ The system implements:
 * **Dependency-based bonus valuation**: Recursive evaluation of prerequisite goals.
 * **Descriptive tracing**: Fully verbose breakdown of computed value components.
 
-This modular architecture is simulation-ready and serves as a component within recursive cognitive systems (e.g. Shandris AGI). It is capable of Lyapunov-stable goal selection in multi-agent cognitive fields.
+This modular architecture is simulation-ready and serves as a component within recursive cognitive systems. It is capable of Lyapunov-stable goal selection in multi-agent cognitive fields.
 
 ---
 
