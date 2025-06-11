@@ -190,6 +190,7 @@ $$
 ## Lyapunov Function Selection
 
 We define a candidate Lyapunov function:
+
 $$[
 V(\delta \mathbf{P}) = \frac{1}{2} \sum_{i=1}^n \left( \delta P_i \right)^2 = \frac{1}{2} \| \delta \mathbf{P} \|^2
 ]$$
@@ -205,19 +206,23 @@ This function represents the "energy" or "deviation magnitude" of the system fro
 ## Time Derivative of Lyapunov Function
 
 Compute:
+
 $$[
 \frac{dV}{dt} = \sum_{i=1}^n \delta P_i \cdot \frac{d}{dt} \delta P_i
 ]$$
 
 We know:
+
 $$[
 \frac{d}{dt} \delta P_i = \frac{d}{dt} P_i(t) - \frac{d}{dt} P_i^*(t)
 ]$$
 
 Assume $(P_i^*(t))$ is a stable fixed point (not changing over time):
+
 $$[
 \frac{d}{dt} P_i^*(t) = 0
 ]$$
+
 So:
 
 $$[
@@ -229,16 +234,19 @@ $$[
 ## Dynamics of Effective Value
 
 From thearchitecture:
+
 $$[
 P_i(t) = U_i(t) \cdot V_i(s(t)) + D_i(t, s(t)) + M_i(t, s(t); T)
 ]$$
 
 Assume urgency decays over time:
+
 $$[
 \frac{d}{dt} U_i(t) = -k_i U_i(t), \quad k_i > 0
 ]$$
 
 Utility changes with state evolution:
+
 $$[
 \frac{d}{dt} V_i(s(t)) = \nabla_s V_i(s(t)) \cdot \frac{d}{dt} s(t)
 ]$$
@@ -250,11 +258,13 @@ Dependencies and trait terms assumed to be Lipschitz continuous (bounded rate of
 ## Bounding the Derivative
 
 The dominant decay comes from urgency:
+
 $$[
 \frac{d}{dt} P_i(t) \approx -k_i V_i(s(t)) U_i(t) + \text{bounded terms}
 ]$$
 
 So:
+
 $$[
 \frac{dV}{dt} \leq -\sum_{i=1}^n k_i \delta P_i U_i(t) V_i(s(t)) + \epsilon(t)
 ]$$
@@ -266,6 +276,7 @@ Since:
 - $(V_i(s(t)) \geq 0)$ (utility is non-negative)
 
 We can write:
+
 $$[
 \frac{dV}{dt} \leq -c \|\delta \mathbf{P}\|^2 + \epsilon(t)
 ]$$
