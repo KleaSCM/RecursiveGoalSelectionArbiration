@@ -146,9 +146,9 @@ This guarantees Lyapunov stability of the arbitration mechanism.
 Let the system at time $(t)$ be described by a priority vector $(\mathbf{P}(t) \in \mathbb{R}^n )$, where each component $(P_i(t))$ is the effective value* of goal $(i)$.
 
 From the system:
-\[
+$$[
 P_i(t) = U_i(t) \cdot V_i(s(t)) + D_i(t, s(t)) + M_i(t, s(t); T)
-\]
+$$]
 
 Let:
 - \( \mathbf{U}(t) \) = urgency vector
