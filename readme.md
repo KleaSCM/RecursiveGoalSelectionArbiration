@@ -21,6 +21,7 @@ This modular architecture is simulation-ready and serves as a component within r
 * [Installation](#installation)
 * [Usage](#usage)
 * [Mathematical Foundation](#mathematical-foundation)
+* [Lyapunov Stability in Recursive Goal Arbitration](#Lyapunov-Stability-in-Recursive-Goal-Arbitration)
 * [Goal Class Design](#goal-class-design)
 * [Trait Set Architecture](#trait-set-architecture)
 * [Urgency and Utility Functions](#urgency-and-utility-functions)
