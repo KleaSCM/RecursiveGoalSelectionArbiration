@@ -143,7 +143,13 @@ This guarantees Lyapunov stability of the arbitration mechanism.
 
 ## Formal Setup
 
-Let the system at time $(t)$ be described by a priority vector $(\mathbf{P}(t) \in \mathbb{R}^n)$, where each component $(P_i(t))$ is the effective value of goal $(i)$.
+Let the system at time $(t)$ be described by a priority vector 
+
+$$
+(\mathbf{P}(t) \in \mathbb{R}^n), 
+$$
+
+where each component $(P_i(t))$ is the effective value of goal $(i)$.
 
 From the system:
 
@@ -165,13 +171,19 @@ Let:
 
 Assume a small perturbation:
 
-$$[
+$$
+\begin{aligned}
 \delta \mathbf{P}(t) = \mathbf{P}(t) - \mathbf{P}^*(t)
-\]$$
+\end{aligned}
+$$
 
 where $(\mathbf{P}^*(t))$ is the equilibrium priority vector.
 
-Our goal is to prove that $(\delta \mathbf{P}(t) \rightarrow 0)$ as $(t \rightarrow \infty)$.
+Our goal is to prove that 
+
+$$
+(\delta \mathbf{P}(t) \rightarrow 0)$ as $(t \rightarrow \infty).
+$$
 
 ---
 
