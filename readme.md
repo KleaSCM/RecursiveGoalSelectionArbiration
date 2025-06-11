@@ -126,8 +126,6 @@ $$
 
 ---
 
----
-
 # Lyapunov Stability in Recursive Goal Arbitration
 
 This section formalizes the **Lyapunov stability criteria** for the recursive goal arbitration system described in this package.
