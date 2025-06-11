@@ -1,6 +1,6 @@
 # Goal Prioritization Engine
 
-A mathematically-grounded goal prioritization engine, inspired by cognitive architectures and formalized in the accompanying paper: *"Mathematical Formalization of Consciousness Coupling and Attractor Collapse"* by Klea (May 2025). This engine models recursive, trait-modulated goal valuation with dependencies and dynamic traits such as risk aversion, urgency sensitivity, and exploratory tendencies.
+A mathematically-grounded goal prioritization engine, inspired by cognitive architectures and formalized in the accompanying paper: *"Mathematical Formalization of Consciousness Coupling and Attractor Collapse"*  This engine models recursive, trait-modulated goal valuation with dependencies and dynamic traits such as risk aversion, urgency sensitivity, and exploratory tendencies.
 
 ## Overview
 
@@ -116,11 +116,13 @@ $$
 Where modifier term $M$ is given by:
 
 $$
-M(t, s; T) =
-  \alpha_1 \cdot 1_{\text{urgency-sensitive}} \cdot \text{BaseValue}
-+ \alpha_2 \cdot 1_{\text{risk-averse}} \cdot (-\text{risk} \cdot \text{BaseValue})
-+ \alpha_3 \cdot 1_{\text{exploratory}} \cdot \text{novelty} \cdot \text{BaseValue}
+\begin{aligned}
+M(t, s; T) = {} & \alpha_1 \cdot 1_{\text{urgency-sensitive}} \cdot \text{BaseValue} \\
+                & + \alpha_2 \cdot 1_{\text{risk-averse}} \cdot (-\text{risk} \cdot \text{BaseValue}) \\
+                & + \alpha_3 \cdot 1_{\text{exploratory}} \cdot \text{novelty} \cdot \text{BaseValue}
+\end{aligned}
 $$
+
 
 ---
 
@@ -233,7 +235,3 @@ print(describe(G2, t=0.25, state={"risk": 0.2, "novelty": 0.9, "safety_level": 0
 MIT License. Use freely with attribution to Aikawa Yuriko and contributors.
 
 ---
-
-## Citation
-
-Klea. (2025). *Mathematical Formalization of Consciousness Coupling and Attractor Collapse*. Self-published manuscript, May 2025. Fitzroy Crossing, WA.
