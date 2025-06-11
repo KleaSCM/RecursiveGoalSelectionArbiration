@@ -164,9 +164,11 @@ Let:
 ## Perturbation Definition
 
 Assume a small perturbation:
+
 $$[
 \delta \mathbf{P}(t) = \mathbf{P}(t) - \mathbf{P}^*(t)
 \]$$
+
 where $(\mathbf{P}^*(t))$ is the equilibrium priority vector.
 
 Our goal is to prove that $(\delta \mathbf{P}(t) \rightarrow 0)$ as $(t \rightarrow \infty)$.
