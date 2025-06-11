@@ -211,7 +211,7 @@ $$[
 
 ## Dynamics of Effective Value
 
-From your architecture:
+From thearchitecture:
 $$[
 P_i(t) = U_i(t) \cdot V_i(s(t)) + D_i(t, s(t)) + M_i(t, s(t); T)
 ]$$
