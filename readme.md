@@ -161,25 +161,21 @@ Let:
 ## Perturbation Definition
 
 Assume a small perturbation:
-$$
-[
+$$[
 \delta \mathbf{P}(t) = \mathbf{P}(t) - \mathbf{P}^*(t)
-\]
-$$
+\]$$
 where $(\mathbf{P}^*(t))$ is the equilibrium priority vector.
 
-Our goal is to prove that $(\delta \mathbf{P}(t) \rightarrow 0 )$ as $( t \rightarrow \infty)$.
+Our goal is to prove that $(\delta \mathbf{P}(t) \rightarrow 0)$ as $( t \rightarrow \infty)$.
 
 ---
 
 ## Lyapunov Function Selection
 
 We define a candidate Lyapunov function:
-$$
-[
+$$[
 V(\delta \mathbf{P}) = \frac{1}{2} \sum_{i=1}^n \left( \delta P_i \right)^2 = \frac{1}{2} \| \delta \mathbf{P} \|^2
-]
-$$
+]$$
 
 Properties:
 - $(V(\delta \mathbf{P}) > 0 \) for \( \delta \mathbf{P} \neq 0 \)$
@@ -192,18 +188,14 @@ This function represents the "energy" or "deviation magnitude" of the system fro
 ## Time Derivative of Lyapunov Function
 
 Compute:
-$$
-[
+$$[
 \frac{dV}{dt} = \sum_{i=1}^n \delta P_i \cdot \frac{d}{dt} \delta P_i
-]
-$$
+]$$
 
 We know:
-$$
-[
+$$[
 \frac{d}{dt} \delta P_i = \frac{d}{dt} P_i(t) - \frac{d}{dt} P_i^*(t)
-]
-$$
+]$$
 
 Assume $(P_i^*(t))$ is a stable fixed point (not changing over time):
 $$
