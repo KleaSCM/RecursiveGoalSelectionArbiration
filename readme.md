@@ -1,6 +1,6 @@
 # Goal Prioritization Engine
 
-A mathematically-grounded goal prioritization engine, inspired by cognitive architectures and formalized in the accompanying paper: *"Mathematical Formalization of Consciousness Coupling and Attractor Collapse"* by Klea (May 2025). This engine models recursive, trait-modulated goal valuation with dependencies and dynamic traits such as risk aversion, urgency sensitivity, and exploratory tendencies.
+A mathematically-grounded goal prioritization engine, inspired by cognitive architectures and formalized in the accompanying paper: *"Mathematical Formalization of Consciousness Coupling and Attractor Collapse"* This engine models recursive, trait-modulated goal valuation with dependencies and dynamic traits such as risk aversion, urgency sensitivity, and exploratory tendencies.
 
 ## Overview
 
@@ -235,7 +235,3 @@ print(describe(G2, t=0.25, state={"risk": 0.2, "novelty": 0.9, "safety_level": 0
 MIT License. Use freely with attribution to Aikawa Yuriko and contributors.
 
 ---
-
-## Citation
-
-Klea. (2025). *Mathematical Formalization of Consciousness Coupling and Attractor Collapse*. Self-published manuscript, May 2025. Fitzroy Crossing, WA.
